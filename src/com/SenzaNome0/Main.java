@@ -3,7 +3,23 @@ package com.SenzaNome0;
 public class Main {
     private static int MAXVITATAMAGOLEM;
     private static final String[] elementi = new String[]{"acqua", "fuoco", "aria", "terra", "elettricita'"};
+
+    private static void benvenutoUtente() {
+        System.out.println("Benvenuti nel fantastico gioco di TamaGolemGO!");
+
+        System.out.println("Vuoi cominciare una nuova partita? ");
+        String[] opzioni = new String[]{"si", "no"};
+        if (Console.stringInput(opzioni).equals("si")) {
+
+        } else {
+            Console.chiudiProgramma();
+            System.exit(0);
+        }
+    }
+
     public static void main(String[] args) {
+        benvenutoUtente();
+
         Equilibrio equilibrio = new Equilibrio(elementi);
 
         for (int i = 0; i < elementi.length; i++)
