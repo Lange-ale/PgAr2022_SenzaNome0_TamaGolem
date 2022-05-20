@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class TamaGolem {
     private int V;
-    ArrayList<String> pietre;
+    ArrayList<Integer> pietre;
 
-    public TamaGolem(int V, ArrayList<String> pietre) {
+    public TamaGolem(int V, ArrayList<Integer> pietre) {
         this.V = V;
         this.pietre = pietre;
     }
@@ -18,7 +18,7 @@ public class TamaGolem {
         this.V = V;
     }
 
-    public String getPietra(int index) {
+    public int getPietra(int index) {
         return pietre.get(index);
     }
 }
