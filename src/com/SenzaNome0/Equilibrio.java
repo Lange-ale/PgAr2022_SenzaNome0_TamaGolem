@@ -80,4 +80,8 @@ public class Equilibrio {
 
         return s.toString();
     }
+
+    public String[] getElementi() {
+        return elementi;
+    }
 }
