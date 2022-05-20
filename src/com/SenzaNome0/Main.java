@@ -33,32 +33,35 @@ public class Main {
 
             int turnoCounter = 1;
             int scontroCounter = 1;
+            boolean nuovoScontro = true;
             while (scontro.getVincitore() == 0) {
+                if (nuovoScontro && scontroCounter > 1) System.out.println("\n\n" + scontroCounter + "° scontro della partita!\n");
+
                 scontro.turno();
                 System.out.println("\nStato del gioco dopo il " + turnoCounter + "° turno: ");
                 System.out.println(scontro);
+
+                nuovoScontro = false;
 
                 if(scontro.getGiocatore1().getTamaGolem().isMorto()){
                     System.out.println(Console.ANSI_RED + "\nIl golem del GIOCATORE 1 è morto :(\n" + Console.ANSI_RESET);
                     turnoCounter = 0;
                     scontroCounter++;
+                    nuovoScontro = true;
 
                     scontro.getGiocatore1().setG(scontro.getGiocatore1().getG()-1);
                     if(scontro.getGiocatore1().getG()>0)
                         selezionaPietre(true, scontro);
-
-                    System.out.println("\n\n" + scontroCounter + "° scontro della partita!\n");
                 }
                 else if(scontro.getGiocatore2().getTamaGolem().isMorto()){
                     System.out.println(Console.ANSI_RED + "\nIl golem del GIOCATORE 2 è morto :(\n" + Console.ANSI_RESET);
                     turnoCounter = 0;
                     scontroCounter++;
+                    nuovoScontro = true;
 
                     scontro.getGiocatore2().setG(scontro.getGiocatore1().getG()-1);
                     if(scontro.getGiocatore2().getG()>0)
                         selezionaPietre(false, scontro);
-
-                    System.out.println("\n\n" + scontroCounter + "° scontro della partita!\n");
                 }
 
                 turnoCounter++;
