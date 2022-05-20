@@ -12,16 +12,13 @@ public class Main {
 
         System.out.println("Vuoi cominciare una nuova partita? (si/no)");
         String[] opzioni = new String[]{"si", "no"};
-        if (Console.stringInput(opzioni).equals("si")) {
-            // TODO: Start the actual game which is currently done in the main method
-            return;
-        } else {
+        if (Console.stringInput(opzioni).equals("si")) {} else {
             Console.chiudiProgramma();
             System.exit(0);
         }
     }
 
-    private static int richiediPietra(boolean iniziaGiocatore1, Scontro scontro) {
+    private static int inputPietra(boolean iniziaGiocatore1, Scontro scontro) {
         System.out.println("Pietre disponibili (nome - quantità): ");
 
         ArrayList<String> opzioni = new ArrayList<>();
@@ -49,50 +46,43 @@ public class Main {
         return -1; // dovrebbe essere impossibile che l'utente scelga un input non valido...
     }
 
-    private static void faseDiSelezionePietre(boolean iniziaGiocatore1, Scontro scontro) {
+    private static void selezionaPietre(boolean giocatore1, Scontro scontro) {
+        ArrayList<Integer> pietreScelte = new ArrayList<Integer>();
+
+        Console.stampaSuccesso("GIOCATORE " + ((giocatore1) ? "1" : "2") +  " devi scegliere le pietre per il tuo nuovo Tamagolem!");
+
+        for (int i = 0; i < scontro.getP(); i++) {
+            int pietraScelta = inputPietra(true, scontro);
+            pietreScelte.add(pietraScelta);
+            Console.stampaSuccesso("Ottima scelta!\n");
+        }
+
+        if (giocatore1)
+            scontro.getGiocatore1().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, pietreScelte));
+        else
+            scontro.getGiocatore2().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, pietreScelte));
+    }
+
+    private static void faseDiSelezionePietreIniziale(boolean iniziaGiocatore1, Scontro scontro) {
         ArrayList<Integer> pietrePrimoGiocatore = new ArrayList<Integer>();
         ArrayList<Integer> pietreSecondoGiocatore = new ArrayList<Integer>();
 
         if (iniziaGiocatore1) {
             Console.stampaSuccesso("Comincia il GIOCATORE 1 a selezionare le pietre del nuovo Tamagolem!\n");
 
-            for (int i = 0; i < scontro.getP(); i++) {
-                int pietraScelta = richiediPietra(true, scontro);
-                pietrePrimoGiocatore.add(pietraScelta);
-                Console.stampaSuccesso("Ottima scelta!\n");
-            }
+            selezionaPietre(true, scontro);
 
             Console.stampaSuccesso("\nOra tocca al GIOCATORE 2!\n");
 
-            for (int i = 0; i < scontro.getP(); i++) {
-                int pietraScelta = richiediPietra(false, scontro);
-                pietreSecondoGiocatore.add(pietraScelta);
-                Console.stampaSuccesso("Ottima scelta!\n");
-            }
-            System.out.println();
-
-            scontro.getGiocatore1().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, pietrePrimoGiocatore));
-            scontro.getGiocatore2().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, pietreSecondoGiocatore));
+            selezionaPietre(false, scontro);
         } else {
             Console.stampaSuccesso("Comincia il GIOCATORE 2 a selezionare le pietre del nuovo Tamagolem!\n");
 
-            for (int i = 0; i < scontro.getP(); i++) {
-                int pietraScelta = richiediPietra(false, scontro);
-                pietreSecondoGiocatore.add(pietraScelta);
-                Console.stampaSuccesso("Ottima scelta!\n");
-            }
+            selezionaPietre(false, scontro);
 
             Console.stampaSuccesso("\nOra tocca al GIOCATORE 1!\n");
 
-            for (int i = 0; i < scontro.getP(); i++) {
-                int pietraScelta = richiediPietra(true, scontro);
-                pietrePrimoGiocatore.add(pietraScelta);
-                Console.stampaSuccesso("Ottima scelta!\n");
-            }
-            System.out.println();
-
-            scontro.getGiocatore1().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, pietrePrimoGiocatore));
-            scontro.getGiocatore2().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, pietreSecondoGiocatore));
+            selezionaPietre(true, scontro);
         }
 
         Console.stampaSuccesso("\nComplimenti per entrambi in questa fase di scelta, ora a turno vi sfiderete con i vostri tamagolem!\n");
@@ -113,19 +103,19 @@ public class Main {
         Scontro scontro = new Scontro(MAXVITATAMAGOLEM, equilibrio);
         boolean iniziaGiocatore1 = Math.random()*2>1;
 
-        faseDiSelezionePietre(iniziaGiocatore1, scontro);
+        faseDiSelezionePietreIniziale(iniziaGiocatore1, scontro);
 
         while (scontro.getVincitore()==0) {
             scontro.turno();
             if(scontro.getGiocatore1().getTamaGolem().isMorto()){
                 scontro.getGiocatore1().setG(scontro.getGiocatore1().getG()-1);
                 if(scontro.getGiocatore1().getG()>0)
-                    scontro.getGiocatore1().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, null));
+                    selezionaPietre(true, scontro);
             }
             else if(scontro.getGiocatore2().getTamaGolem().isMorto()){
                 scontro.getGiocatore2().setG(scontro.getGiocatore1().getG()-1);
                 if(scontro.getGiocatore2().getG()>0)
-                    scontro.getGiocatore2().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, null));
+                    selezionaPietre(false, scontro);
             }
 
         }
