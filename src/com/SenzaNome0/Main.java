@@ -38,7 +38,8 @@ public class Main {
             scontro.getGiocatore1().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, null));
         }
 
-        while (scontro.getGiocatore1().getG()>0 && scontro.getGiocatore2().getG()>0) {
+        while (scontro.getVincitore()==0) {
+            scontro.turno();
 
         }
     }

@@ -13,6 +13,18 @@ public class Scontro {
     private final Map<String, Integer> pietre;
     private final Giocatore giocatore1, giocatore2;
 
+    private int indexPietraAttuale = 0; //pietra
+    public void turno(){
+        int potenza = equilibrio.getPotenza(giocatore1.getTamaGolem().getPietra(indexPietraAttuale),
+                giocatore2.getTamaGolem().getPietra(indexPietraAttuale));
+        if (potenza > 0)
+            giocatore2.getTamaGolem().subisciDanno(potenza);
+        else
+            giocatore1.getTamaGolem().subisciDanno(-potenza);
+        indexPietraAttuale = (indexPietraAttuale+1)%P;
+    }
+
+
     public Scontro(int V, Equilibrio equilibrio) {
         this.V = V;
         this.equilibrio = equilibrio;
@@ -29,6 +41,8 @@ public class Scontro {
         giocatore2 = new Giocatore(G);
     }
 
+
+
     public Equilibrio getEquilibrio() {
         return equilibrio;
     }
@@ -40,4 +54,11 @@ public class Scontro {
     public Giocatore getGiocatore2() {
         return giocatore2;
     }
+
+    int getVincitore(){
+        if (giocatore2.getG()<=0) return 1;
+        if (giocatore1.getG()<=0) return 2;
+        return 0;
+    }
+
 }
