@@ -105,7 +105,7 @@ public class Main {
         Scontro scontro = new Scontro(MAXVITATAMAGOLEM, equilibrio);
         boolean iniziaGiocatore1 = Math.random()*2>1;
 
-        richiediPietra(scontro);
+        faseDiSelezionePietre(iniziaGiocatore1, scontro);
 
         while (scontro.getVincitore()==0) {
             scontro.turno();
