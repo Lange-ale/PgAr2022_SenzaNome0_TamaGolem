@@ -17,6 +17,11 @@ public class TamaGolem {
     public void setV(int V) {
         this.V = V;
     }
+    public boolean isMorto (){
+        if (this.V <=0)
+            return true;
+        return false;
+    }
 
     public int getPietra(int index) {
         return pietre.get(index);
