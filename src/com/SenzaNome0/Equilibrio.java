@@ -3,12 +3,12 @@ package com.SenzaNome0;
 import java.util.Arrays;
 
 public class Equilibrio {
-    private final int nElem;
+    private final int N;
     private final int[][] equilibrio;
     private final String[] elementi;
     public Equilibrio(String[] elementi) {
-        this.nElem = elementi.length;
-        equilibrio = new int[nElem][nElem];
+        this.N = elementi.length;
+        equilibrio = new int[N][N];
         this.elementi = elementi;
 
         creaEquilibrio();
@@ -16,12 +16,12 @@ public class Equilibrio {
 
     private void creaEquilibrio(){
         int somma, temp, randomConSommaA0;
-        for (int i = 0; i < nElem-1; i++) {
+        for (int i = 0; i < N-1; i++) {
             somma = 0;
             for (int j = 0; j < i; j++)
                 somma += equilibrio[i][j];
             equilibrio[i][i] = 0;
-            for (int j = i + 1; j < nElem - 1; j++) {
+            for (int j = i + 1; j < N - 1; j++) {
                 randomConSommaA0 = -1;
                 if(somma == 0)
                     randomConSommaA0 = (int)(Math.random()*2);
@@ -36,11 +36,11 @@ public class Equilibrio {
                     somma += temp;
                 }
             }
-            equilibrio[i][nElem - 1] = -somma;
-            equilibrio[nElem - 1][i] = somma;
+            equilibrio[i][N - 1] = -somma;
+            equilibrio[N - 1][i] = somma;
 
-            if(equilibrio[i][nElem - 1]==0) {
-                if (i == nElem - 2){
+            if(equilibrio[i][N - 1]==0) {
+                if (i == N - 2){
                     //regole non soddisfatte, quindi tutta la matrice
                     //da rifare (la probabilita' che accada e' molto bassa)
                     creaEquilibrio();
@@ -49,11 +49,11 @@ public class Equilibrio {
                 else i--; //combinazione non valida
             }
         }
-        equilibrio[nElem - 1][nElem - 1] = 0;
+        equilibrio[N - 1][N - 1] = 0;
     }
 
-    public int getNElem() {
-        return nElem;
+    public int getN() {
+        return N;
     }
 
     public int getPotenza(int el1, int el2) {
@@ -63,8 +63,8 @@ public class Equilibrio {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("VINCITORE -> POTENZA -> PERDENTE\n");
-        for (int i = 0; i < nElem - 1; i++)
-            for (int j = i + 1; j < nElem; j++)
+        for (int i = 0; i < N - 1; i++)
+            for (int j = i + 1; j < N; j++)
                 if (equilibrio[i][j]>0)
                     s.append(elementi[i]).append(" -> ").append(equilibrio[i][j]).append(" -> ").append(elementi[j]).append("\n");
                 else
