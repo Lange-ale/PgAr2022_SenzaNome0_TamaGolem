@@ -38,6 +38,14 @@ public class Main {
                 if (nuovoScontro && scontroCounter > 1) System.out.println("\n\n" + scontroCounter + "° scontro della partita!\n");
 
                 scontro.turno();
+
+                // Controllo nel caso in cui i Tamagolem (in termini di pietre nell'ordine) scelti sono gli stessi
+                if (scontro.getGiocatore1().getTamaGolem().equals(scontro.getGiocatore2().getTamaGolem())) {
+                    Console.stampaErrore("C'è stato un poblema con l'esecuzione del programma...");
+                    Console.chiudiProgramma();
+                    //TODO: Bisogna sistemare sto problema, ad esempio facendo riscegliere i tamagolem e rimettendo le pietre nel "cesto" comune
+                }
+
                 System.out.println("\nStato del gioco dopo il " + turnoCounter + "° turno: ");
                 System.out.println(scontro);
 
@@ -93,7 +101,7 @@ public class Main {
                 opzioni.add(pietra.getKey());
         }
 
-        if (opzioni.size()==scontro.getP()){
+        if (opzioni.size() == scontro.getP()){
             boolean ultimoTamaGolemEvocabile = true;
             for (String opzione : opzioni)
                 if (scontro.getPietre().get(opzione) > 1)
@@ -106,6 +114,12 @@ public class Main {
             System.out.println(s + " - " + scontro.getPietre().get(s));
 
         System.out.println();
+
+        if (opzioni.size() == 0) {
+            Console.stampaErrore("C'è stato un poblema con l'esecuzione del programma...");
+            Console.chiudiProgramma();
+            //TODO: Lange Junior devi sistemare l'algoritmo in un qualche modo...
+        }
 
         System.out.println("GIOCATORE " + ((iniziaGiocatore1) ? "1" : "2") + " scegli una tra queste pietre (usa il nome come stampato): ");
         String[] opzioniArray = new String[opzioni.size()];
@@ -128,7 +142,7 @@ public class Main {
 
         Console.stampaSuccesso("GIOCATORE " + ((giocatore1) ? "1" : "2") +  " devi scegliere le pietre per il tuo nuovo Tamagolem!");
 
-        Set<String> giaPresi  = new HashSet<>();
+        Set<String> giaPresi = new HashSet<>();
         for (int i = 0; i < scontro.getP(); i++) {
             int pietraScelta = inputPietra(giocatore1, scontro, giaPresi);
             pietreScelte.add(pietraScelta);

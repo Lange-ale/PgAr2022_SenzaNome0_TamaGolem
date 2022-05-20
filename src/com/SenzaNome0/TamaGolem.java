@@ -1,6 +1,7 @@
 package com.SenzaNome0;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TamaGolem {
     private int V;
@@ -32,5 +33,27 @@ public class TamaGolem {
     @Override
     public String toString() {
         return "vita rimanente:" + V;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TamaGolem tamaGolem = (TamaGolem) o;
+
+        if (pietre.size() != tamaGolem.pietre.size()) return false;
+
+        int i = 0;
+        for (var pietra : tamaGolem.pietre) {
+            if (!Objects.equals(pietra, pietre.get(i))) return false;
+            i++;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pietre);
     }
 }
