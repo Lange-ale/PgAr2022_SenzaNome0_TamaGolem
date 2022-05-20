@@ -27,7 +27,7 @@ public class Main {
 
             faseDiSelezionePietreIniziale(iniziaGiocatore1, scontro);
 
-            System.out.println("1° scontro della partita!");
+            System.out.println(Console.ANSI_BLUE_BACKGROUND + Console.ANSI_BLACK + "1° scontro della partita!" + Console.ANSI_RESET);
             System.out.println("Stato del gioco a inizio partita: ");
             System.out.println(scontro);
 
@@ -35,7 +35,7 @@ public class Main {
             int scontroCounter = 1;
             boolean nuovoScontro = true;
             while (scontro.getVincitore() == 0) {
-                if (nuovoScontro && scontroCounter > 1) System.out.println("\n\n" + scontroCounter + "° scontro della partita!\n");
+                if (nuovoScontro && scontroCounter > 1) System.out.println("\n\n" + Console.ANSI_BLUE_BACKGROUND + Console.ANSI_BLACK + scontroCounter + "° scontro della partita!\n" + Console.ANSI_RESET);
 
                 scontro.turno();
 
