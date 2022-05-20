@@ -24,7 +24,6 @@ public class Scontro {
         indexPietraAttuale = (indexPietraAttuale+1)%P;
     }
 
-
     public Scontro(int V, Equilibrio equilibrio) {
         this.V = V;
         this.equilibrio = equilibrio;
