@@ -35,7 +35,7 @@ public class Main {
             int scontroCounter = 1;
             boolean nuovoScontro = true;
             while (scontro.getVincitore() == 0) {
-                if (nuovoScontro && scontroCounter > 1) System.out.println("\n\n" + Console.ANSI_BLUE_BACKGROUND + Console.ANSI_BLACK + scontroCounter + "° scontro della partita!\n" + Console.ANSI_RESET);
+                if (nuovoScontro && scontroCounter > 1) System.out.println("\n\n" + Console.ANSI_BLUE_BACKGROUND + Console.ANSI_BLACK + scontroCounter + "° scontro della partita!" + Console.ANSI_RESET + "\n");
 
                 scontro.turno();
 
