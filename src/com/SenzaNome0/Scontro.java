@@ -72,6 +72,6 @@ public class Scontro {
 
     @Override
     public String toString() {
-        return "GIOCATORE1: " + giocatore1.getTamaGolem() + "\nGIOCATORE2: " + giocatore2.getTamaGolem();
+        return "Golem GIOCATORE 1: " + giocatore1.getTamaGolem() + " - Golem GIOCATORE 2: " + giocatore2.getTamaGolem();
     }
 }

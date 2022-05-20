@@ -10,6 +10,7 @@ public class Main {
     private static void benvenutoUtente() {
         System.out.println("Benvenuti nel fantastico gioco di TamaGolemGO!");
 
+        // TODO: Ricomincia la partita (crea macrociclo o callback hell)
         System.out.println("Vuoi cominciare una nuova partita? (si/no)");
         String[] opzioni = new String[]{"si", "no"};
         if (Console.stringInput(opzioni).equals("si")) {} else {
@@ -52,7 +53,7 @@ public class Main {
         Console.stampaSuccesso("GIOCATORE " + ((giocatore1) ? "1" : "2") +  " devi scegliere le pietre per il tuo nuovo Tamagolem!");
 
         for (int i = 0; i < scontro.getP(); i++) {
-            int pietraScelta = inputPietra(true, scontro);
+            int pietraScelta = inputPietra(giocatore1, scontro);
             pietreScelte.add(pietraScelta);
             Console.stampaSuccesso("Ottima scelta!\n");
         }
@@ -105,19 +106,41 @@ public class Main {
 
         faseDiSelezionePietreIniziale(iniziaGiocatore1, scontro);
 
-        while (scontro.getVincitore()==0) {
+        System.out.println("1° scontro della partita!");
+        System.out.println("Stato del gioco a inizio partita: ");
+        System.out.println(scontro);
+
+        int turnoCounter = 1;
+        int scontroCounter = 1;
+        while (scontro.getVincitore() == 0) {
             scontro.turno();
+            System.out.println("\nStato del gioco dopo il " + turnoCounter + "° turno: ");
+            System.out.println(scontro);
+
             if(scontro.getGiocatore1().getTamaGolem().isMorto()){
+                System.out.println(Console.ANSI_RED + "\nIl golem del GIOCATORE 1 è morto :(\n" + Console.ANSI_RESET);
+                turnoCounter = 0;
+                scontroCounter++;
+
                 scontro.getGiocatore1().setG(scontro.getGiocatore1().getG()-1);
                 if(scontro.getGiocatore1().getG()>0)
                     selezionaPietre(true, scontro);
+
+                System.out.println("\n\n" + scontroCounter + "° scontro della partita!\n");
             }
             else if(scontro.getGiocatore2().getTamaGolem().isMorto()){
+                System.out.println(Console.ANSI_RED + "\nIl golem del GIOCATORE 2 è morto :(\n" + Console.ANSI_RESET);
+                turnoCounter = 0;
+                scontroCounter++;
+
                 scontro.getGiocatore2().setG(scontro.getGiocatore1().getG()-1);
                 if(scontro.getGiocatore2().getG()>0)
                     selezionaPietre(false, scontro);
+
+                System.out.println("\n\n" + scontroCounter + "° scontro della partita!\n");
             }
 
+            turnoCounter++;
         }
     }
 }
