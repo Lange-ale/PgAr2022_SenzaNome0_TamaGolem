@@ -69,4 +69,9 @@ public class Scontro {
     public Map<String, Integer> getPietre() {
         return pietre;
     }
+
+    @Override
+    public String toString() {
+        return "GIOCATORE1: " + giocatore1.getTamaGolem() + "\nGIOCATORE2: " + giocatore2.getTamaGolem();
+    }
 }

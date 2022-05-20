@@ -28,4 +28,9 @@ public class TamaGolem {
     public int getPietra(int index) {
         return pietre.get(index);
     }
+
+    @Override
+    public String toString() {
+        return "vita rimanente:" + V;
+    }
 }
