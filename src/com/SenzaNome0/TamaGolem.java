@@ -11,6 +11,10 @@ public class TamaGolem {
         this.pietre = pietre;
     }
 
+    public void subisciDanno(int dannoSubito){
+        this.V-=dannoSubito;
+    }
+
     public int getV() {
         return V;
     }
@@ -18,9 +22,7 @@ public class TamaGolem {
         this.V = V;
     }
     public boolean isMorto (){
-        if (this.V <=0)
-            return true;
-        return false;
+        return this.V <= 0;
     }
 
     public int getPietra(int index) {
