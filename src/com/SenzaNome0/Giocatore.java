@@ -16,4 +16,12 @@ public class Giocatore {
     public void setG(int G) {
         this.G = G;
     }
+
+    public TamaGolem getTamaGolem() {
+        return tamaGolem;
+    }
+
+    public void setTamaGolem(TamaGolem tamaGolem) {
+        this.tamaGolem = tamaGolem;
+    }
 }
