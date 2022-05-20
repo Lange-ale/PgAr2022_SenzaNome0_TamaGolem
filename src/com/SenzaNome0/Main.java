@@ -139,10 +139,13 @@ public class Main {
 
         scontro.getPietre().replace(nomePietraScelta, scontro.getPietre().get(nomePietraScelta)-1); // decrementa numero pietra scelta
 
-        //TODO: Lange Junior :)
+        //ricrea la stringa di elementi presente nella classe scontro
         String[] elementi = scontro.getElementi();
+        //crea un ciclo lungo n elementi della stringa
         for (int i = 0; i < elementi.length; i++)
+            //controlla se l'elemento nell'indice i-esimo è uguale al nome della pietra scelta dall'utente
             if (elementi[i].equals(nomePietraScelta)) {
+                //aggiunge all'interfaccia Set di stringhe il nome della pietra scelta
                 giaPresi.add(nomePietraScelta);
                 return i;
             }
@@ -151,26 +154,29 @@ public class Main {
     }
 
     private static void selezionaPietre(boolean giocatore1, Scontro scontro) {
+        //crea un array di pietre che verranno poi scelte dall'utente
         ArrayList<Integer> pietreScelte = new ArrayList<Integer>();
-
         Console.stampaSuccesso("GIOCATORE " + ((giocatore1) ? "1" : "2") +  " devi scegliere le pietre per il tuo nuovo Tamagolem!");
-
+        //crea un'interfaccia Set dove verranno inseriti i nomi delle pietre già scelte
+        // per evitare che un giocatore nella sua selezione abbia lo stesso tipo
+        // di pietra ripetuto es: terra-fuoco-terra
         Set<String> giaPresi = new HashSet<>();
+        //parte un ciclo lungo la quantità di pietre che può avere un tamagolem
         for (int i = 0; i < scontro.getP(); i++) {
+            //crea una variabile che assumerà il valore della pietra scelta dall'utente tramite tastiera
             int pietraScelta = inputPietra(giocatore1, scontro, giaPresi);
+            //aggiunge la pietra all'array di pietre scelte
             pietreScelte.add(pietraScelta);
             Console.stampaSuccesso("Ottima scelta!\n");
         }
 
-        if (giocatore1)
+        if (giocatore1) //se è il giocatore 1, imposta le pietre scelte al suo tamagolem
             scontro.getGiocatore1().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, pietreScelte));
-        else
+        else//sennò imposta le pietre scelte al tamagolem del giocatore 2
             scontro.getGiocatore2().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, pietreScelte));
     }
 
     private static void faseDiSelezionePietreIniziale(boolean iniziaGiocatore1, Scontro scontro) {
-        ArrayList<Integer> pietrePrimoGiocatore = new ArrayList<Integer>();
-        ArrayList<Integer> pietreSecondoGiocatore = new ArrayList<Integer>();
 
         if (iniziaGiocatore1) {
             Console.stampaSuccesso("Comincia il GIOCATORE 1 a selezionare le pietre del nuovo Tamagolem!\n");
