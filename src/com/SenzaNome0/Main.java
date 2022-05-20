@@ -5,6 +5,6 @@ public class Main {
     public static void main(String[] args) {
         String[] elementi = new String[]{"acqua", "fuoco", "aria", "terra", "elettricita'"};
         Scontro scontro = new Scontro(elementi, MAXVITATAMAGOLEM);
-        System.out.println(scontro);
+        System.out.println(scontro.getEquilibrio());
     }
 }

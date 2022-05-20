@@ -28,4 +28,8 @@ public class Scontro {
         giocatore1 = new Giocatore(G);
         giocatore2 = new Giocatore(G);
     }
+
+    public Equilibrio getEquilibrio() {
+        return equilibrio;
+    }
 }
