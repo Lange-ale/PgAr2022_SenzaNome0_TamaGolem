@@ -34,7 +34,7 @@ public class Scontro {
         S = 2*G*P + N-(2*G*P)%N;
         pietre = new HashMap<>();
         int pietrePerElemento = S / N;
-        for (String el : elementi)
+        for (String el : elementi) //mette le pietre nel set comune di pietre
             pietre.put(el, pietrePerElemento);
         giocatore1 = new Giocatore(G);
         giocatore2 = new Giocatore(G);
@@ -52,7 +52,7 @@ public class Scontro {
         return giocatore2;
     }
 
-    int getVincitore(){
+    int getVincitore(){ //trova il vincitore
         if (giocatore2.getG()<=0) return 1;
         if (giocatore1.getG()<=0) return 2;
         return 0;
