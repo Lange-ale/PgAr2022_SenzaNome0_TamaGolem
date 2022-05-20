@@ -9,6 +9,10 @@ public class Giocatore {
         this.G = G;
     }
 
+    public int getG() {
+        return G;
+    }
+
     public void setG(int G) {
         this.G = G;
     }

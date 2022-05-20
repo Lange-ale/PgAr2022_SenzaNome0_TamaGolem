@@ -32,4 +32,12 @@ public class Scontro {
     public Equilibrio getEquilibrio() {
         return equilibrio;
     }
+
+    public Giocatore getGiocatore1() {
+        return giocatore1;
+    }
+
+    public Giocatore getGiocatore2() {
+        return giocatore2;
+    }
 }
