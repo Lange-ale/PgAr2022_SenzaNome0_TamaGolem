@@ -1,7 +1,9 @@
 package com.SenzaNome0;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Main {
     private static int MAXVITATAMAGOLEM;
@@ -9,6 +11,9 @@ public class Main {
 
     public static void main(String[] args) {
         benvenutoUtente();
+
+        System.out.println();
+
         Equilibrio equilibrio = new Equilibrio(elementi);
 
         for (int i = 0; i < elementi.length; i++)
@@ -74,19 +79,28 @@ public class Main {
         }
     }
 
-    private static int inputPietra(boolean iniziaGiocatore1, Scontro scontro) {
+    private static int inputPietra(boolean iniziaGiocatore1, Scontro scontro, Set<String> giaPresi) {
         System.out.println("Pietre disponibili (nome - quantità): ");
 
         ArrayList<String> opzioni = new ArrayList<>();
 
-        int i = 0;
         for (Map.Entry<String, Integer> pietra : scontro.getPietre().entrySet()) {
-            if (pietra.getValue() != 0) {
+            if (pietra.getValue() != 0 && !giaPresi.contains(pietra.getKey()))
                 opzioni.add(pietra.getKey());
-                System.out.println(pietra.getKey() + " - " + pietra.getValue());
-            }
-            i++;
         }
+
+        if (opzioni.size()==scontro.getP()){
+            boolean ultimoTamaGolemEvocabile = true;
+            for (String opzione : opzioni)
+                if (scontro.getPietre().get(opzione) > 1)
+                    ultimoTamaGolemEvocabile = false;
+            if (!ultimoTamaGolemEvocabile)
+                opzioni.removeIf(s -> scontro.getPietre().get(s) == 1);
+        }
+
+        for (String s : opzioni)
+            System.out.println(s + " - " + scontro.getPietre().get(s));
+
         System.out.println();
 
         System.out.println("GIOCATORE " + ((iniziaGiocatore1) ? "1" : "2") + " scegli una tra queste pietre (usa il nome come stampato): ");
@@ -96,8 +110,11 @@ public class Main {
         scontro.getPietre().replace(nomePietraScelta, scontro.getPietre().get(nomePietraScelta)-1); // decrementa numero pietra scelta
 
         String[] elementi = scontro.getElementi();
-        for (i = 0; i < elementi.length; i++)
-            if (elementi[i].equals(nomePietraScelta)) return i;
+        for (int i = 0; i < elementi.length; i++)
+            if (elementi[i].equals(nomePietraScelta)) {
+                giaPresi.add(nomePietraScelta);
+                return i;
+            }
 
         return -1; // dovrebbe essere impossibile che l'utente scelga un input non valido...
     }
@@ -107,8 +124,9 @@ public class Main {
 
         Console.stampaSuccesso("GIOCATORE " + ((giocatore1) ? "1" : "2") +  " devi scegliere le pietre per il tuo nuovo Tamagolem!");
 
+        Set<String> giaPresi  = new HashSet<>();
         for (int i = 0; i < scontro.getP(); i++) {
-            int pietraScelta = inputPietra(giocatore1, scontro);
+            int pietraScelta = inputPietra(giocatore1, scontro, giaPresi);
             pietreScelte.add(pietraScelta);
             Console.stampaSuccesso("Ottima scelta!\n");
         }
