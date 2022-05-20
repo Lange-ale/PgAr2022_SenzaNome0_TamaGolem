@@ -25,7 +25,7 @@ public class Equilibrio {
                 randomConSommaA0 = -1;
                 if(somma == 0)
                     randomConSommaA0 = (int)(Math.random()*2);
-                temp = (int) (Math.random() * 4) + 1;
+                temp = (int) (Math.random() * 100) + 1;
                 if (somma > 0 || randomConSommaA0==0) {
                     equilibrio[i][j] = -temp;
                     equilibrio[j][i] = temp;

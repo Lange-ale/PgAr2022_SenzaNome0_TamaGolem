@@ -142,5 +142,8 @@ public class Main {
 
             turnoCounter++;
         }
+
+        Console.stampaSuccesso("IL VINCITORE E' GIOCATORE" + scontro.getVincitore() + " !!!\n");
+        System.out.println(equilibrio);
     }
 }
