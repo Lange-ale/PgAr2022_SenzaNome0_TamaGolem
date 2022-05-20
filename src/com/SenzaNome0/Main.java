@@ -117,6 +117,16 @@ public class Main {
 
         while (scontro.getVincitore()==0) {
             scontro.turno();
+            if(scontro.getGiocatore1().getTamaGolem().isMorto()){
+                scontro.getGiocatore1().setG(scontro.getGiocatore1().getG()-1);
+                if(scontro.getGiocatore1().getG()>0)
+                    scontro.getGiocatore1().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, null));
+            }
+            else if(scontro.getGiocatore2().getTamaGolem().isMorto()){
+                scontro.getGiocatore2().setG(scontro.getGiocatore1().getG()-1);
+                if(scontro.getGiocatore2().getG()>0)
+                    scontro.getGiocatore2().setTamaGolem(new TamaGolem(MAXVITATAMAGOLEM, null));
+            }
 
         }
     }

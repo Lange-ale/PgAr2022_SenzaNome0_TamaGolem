@@ -17,6 +17,7 @@ public class Giocatore {
         this.G = G;
     }
 
+
     public TamaGolem getTamaGolem() {
         return tamaGolem;
     }
