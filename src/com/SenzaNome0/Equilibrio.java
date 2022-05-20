@@ -60,6 +60,8 @@ public class Equilibrio {
         return equilibrio[el1][el2];
     }
 
+
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("VINCITORE -> POTENZA -> PERDENTE\n");
