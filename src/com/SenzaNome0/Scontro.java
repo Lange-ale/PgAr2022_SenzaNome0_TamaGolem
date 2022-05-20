@@ -41,8 +41,6 @@ public class Scontro {
         giocatore2 = new Giocatore(G);
     }
 
-
-
     public Equilibrio getEquilibrio() {
         return equilibrio;
     }
@@ -61,4 +59,15 @@ public class Scontro {
         return 0;
     }
 
+    public String[] getElementi() {
+        return elementi;
+    }
+
+    public int getP() {
+        return P;
+    }
+
+    public Map<String, Integer> getPietre() {
+        return pietre;
+    }
 }
